@@ -4,6 +4,9 @@ import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  server: {
+    allowedHosts: true,
+  },
   plugins: [
     react(),
     tailwindcss(),
@@ -32,6 +35,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,mp3,wav}'],
+        maximumFileSizeToCacheInBytes: 15 * 1024 * 1024,
       },
     }),
   ],

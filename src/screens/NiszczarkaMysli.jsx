@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, Flame } from 'lucide-react'
 
@@ -9,26 +9,33 @@ export default function NiszczarkaMysli({ navigate }) {
   const [showValidation, setShowValidation] = useState(false)
   const textareaRef = useRef(null)
 
+  // Auto-focus na wejściu — zero dodatkowych kliknięć (ADHD)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (textareaRef.current) textareaRef.current.focus()
+    }, 500) // po animacji wejścia
+    return () => clearTimeout(timer)
+  }, [])
+
   const handleDestroy = () => {
     if (!text.trim() || burning) return
+
+    // Haptic feedback — somatyczne potwierdzenie zniszczenia
+    if (navigator.vibrate) navigator.vibrate(100)
 
     setBurnText(text)
     setBurning(true)
     setText('')
 
-    // Po animacji ognia (2s) — pokaż walidację
     setTimeout(() => {
       setBurning(false)
       setBurnText('')
       setShowValidation(true)
     }, 2200)
 
-    // Schowaj walidację po 4s i oddaj focus
     setTimeout(() => {
       setShowValidation(false)
-      if (textareaRef.current) {
-        textareaRef.current.focus()
-      }
+      if (textareaRef.current) textareaRef.current.focus()
     }, 6000)
   }
 
@@ -57,7 +64,6 @@ export default function NiszczarkaMysli({ navigate }) {
           className="w-full bg-zinc-900 text-zinc-200 text-lg rounded-2xl p-6 resize-none border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-600 transition-colors"
         />
 
-        {/* Overlay z palącym się tekstem */}
         {burning && (
           <div
             className="absolute inset-0 bg-zinc-900 rounded-2xl p-6 overflow-hidden pointer-events-none"
@@ -84,7 +90,6 @@ export default function NiszczarkaMysli({ navigate }) {
         </span>
       </button>
 
-      {/* Walidacja po spaleniu */}
       <AnimatePresence>
         {showValidation && (
           <motion.p

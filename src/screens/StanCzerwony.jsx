@@ -1,85 +1,138 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, Volume2, VolumeX, Wind, Eye } from 'lucide-react'
 
 // ─── Animowany przewodnik oddechowy ───
-// Technika: fizjologiczne westchnienie (physiological sigh)
-// Podwójny krótki wdech nosem → długi wydech ustami
-// Najszybszy udowodniony sposób na aktywację przywspółczulnego UN
+// Fizjologiczne westchnienie (physiological sigh):
+// Wdech 1 nosem (1.2s) → krótka pauza → Wdech 2 nosem (1s) → Wydech ustami (4s) → pauza (1.3s)
+// Koło: puls 1 (mały→średni) → cofnięcie → puls 2 (średni→duży) → kurczenie na wydechu
 function BreathingGuide() {
-  // Cykl: wdech 1 (1.5s) → wdech 2 (1s) → wydech (4s) → pauza (1s) = 7.5s
-  const cycleDuration = 7.5
+  // Fazy: 'inhale1' | 'inhale2' | 'exhale' | 'pause'
+  const [phase, setPhase] = useState('inhale1')
+
+  useEffect(() => {
+    let mounted = true
+    const timers = []
+
+    const runCycle = () => {
+      if (!mounted) return
+
+      setPhase('inhale1')
+
+      timers.push(setTimeout(() => {
+        if (!mounted) return
+        setPhase('inhale2')
+      }, 1500)) // po wdechu 1 (1.2s + 0.3s pauza)
+
+      timers.push(setTimeout(() => {
+        if (!mounted) return
+        setPhase('exhale')
+      }, 2800)) // po wdechu 2 (1.3s później)
+
+      timers.push(setTimeout(() => {
+        if (!mounted) return
+        setPhase('pause')
+      }, 6800)) // po wydechu (4s)
+
+      timers.push(setTimeout(() => {
+        if (!mounted) return
+        runCycle()
+      }, 8000)) // po pauzie (1.2s) → nowy cykl
+    }
+
+    runCycle()
+    return () => {
+      mounted = false
+      timers.forEach(clearTimeout)
+    }
+  }, [])
+
+  const circleSize = {
+    inhale1: 120,
+    inhale2: 165,
+    exhale: 70,
+    pause: 70,
+  }[phase]
+
+  const isInhale = phase === 'inhale1' || phase === 'inhale2'
+  const isPause = phase === 'pause'
+
+  const circleDuration = {
+    inhale1: 1.2,
+    inhale2: 1.0,
+    exhale: 4.0,
+    pause: 0.5,
+  }[phase]
+
+  const label = isInhale ? 'wdech' : isPause ? '' : 'wydech'
+  const sublabel = isInhale ? 'nosem' : isPause ? '' : 'ustami'
+  const pulseNum = phase === 'inhale2' ? '2' : phase === 'inhale1' ? '1' : ''
 
   return (
     <div className="flex flex-col items-center py-8">
-      <motion.div
-        className="rounded-full border-2 border-zinc-700 flex items-center justify-center"
-        animate={{
-          width: [80, 140, 160, 160, 80],
-          height: [80, 140, 160, 160, 80],
-          borderColor: [
-            'rgba(113,113,122,0.5)',
-            'rgba(161,161,170,0.6)',
-            'rgba(161,161,170,0.7)',
-            'rgba(161,161,170,0.5)',
-            'rgba(113,113,122,0.3)',
-          ],
-          boxShadow: [
-            '0 0 0px rgba(161,161,170,0)',
-            '0 0 20px rgba(161,161,170,0.15)',
-            '0 0 30px rgba(161,161,170,0.2)',
-            '0 0 15px rgba(161,161,170,0.1)',
-            '0 0 0px rgba(161,161,170,0)',
-          ],
-        }}
-        transition={{
-          duration: cycleDuration,
-          times: [0, 0.2, 0.33, 0.87, 1],
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      >
-        <motion.span
-          className="text-lg text-zinc-400 text-center select-none"
+      <div className="relative" style={{ width: 180, height: 180 }}>
+        {/* Pulsujące koło */}
+        <motion.div
+          className="absolute rounded-full border-2"
+          style={{ top: '50%', left: '50%', x: '-50%', y: '-50%' }}
           animate={{
-            opacity: [0, 1, 1, 1, 1, 0],
+            width: circleSize,
+            height: circleSize,
+            borderColor: isInhale
+              ? 'rgba(147, 197, 253, 0.5)'
+              : isPause
+                ? 'rgba(113, 113, 122, 0.3)'
+                : 'rgba(253, 186, 116, 0.4)',
+            boxShadow: isInhale
+              ? '0 0 25px rgba(147, 197, 253, 0.15)'
+              : isPause
+                ? '0 0 0px rgba(0,0,0,0)'
+                : '0 0 15px rgba(253, 186, 116, 0.1)',
           }}
           transition={{
-            duration: cycleDuration,
-            times: [0, 0.05, 0.2, 0.33, 0.87, 1],
-            repeat: Infinity,
+            duration: circleDuration,
+            ease: 'easeInOut',
           }}
-        >
-          <motion.span
-            animate={{
-              opacity: [1, 1, 0, 0, 0],
-            }}
-            transition={{
-              duration: cycleDuration,
-              times: [0, 0.3, 0.34, 0.99, 1],
-              repeat: Infinity,
-            }}
-            className="absolute inset-0 flex items-center justify-center"
-          >
-            wdech
-          </motion.span>
-          <motion.span
-            animate={{
-              opacity: [0, 0, 1, 1, 0],
-            }}
-            transition={{
-              duration: cycleDuration,
-              times: [0, 0.33, 0.37, 0.85, 0.9],
-              repeat: Infinity,
-            }}
-            className="absolute inset-0 flex items-center justify-center"
-          >
-            wydech
-          </motion.span>
-        </motion.span>
-      </motion.div>
+        />
 
-      <p className="text-zinc-600 text-sm mt-6 text-center max-w-[240px]">
+        {/* Label */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <AnimatePresence mode="wait">
+            {label && (
+              <motion.div
+                key={phase}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="flex flex-col items-center gap-1 select-none"
+              >
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`text-lg font-light ${
+                      isInhale ? 'text-blue-300/70' : 'text-orange-300/60'
+                    }`}
+                  >
+                    {label}
+                  </span>
+                  {pulseNum && (
+                    <span className="text-xs text-blue-400/40">{pulseNum}/2</span>
+                  )}
+                </div>
+                <span
+                  className={`text-xs ${
+                    isInhale ? 'text-blue-400/40' : 'text-orange-400/40'
+                  }`}
+                >
+                  {sublabel}
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      <p className="text-zinc-600 text-sm mt-6 text-center max-w-[260px]">
         Dwa krótkie wdechy nosem, jeden długi wydech ustami
       </p>
     </div>
@@ -88,11 +141,11 @@ function BreathingGuide() {
 
 // ─── Uziemienie sensoryczne 5-4-3-2-1 ───
 const groundingSteps = [
-  { count: 5, sense: 'widzisz', icon: '👁', prompt: 'Rozejrzyj się. Wymień 5 rzeczy, które widzisz.' },
-  { count: 4, sense: 'słyszysz', icon: '👂', prompt: 'Wsłuchaj się. Wymień 4 dźwięki, które słyszysz.' },
-  { count: 3, sense: 'dotykasz', icon: '🤲', prompt: 'Dotknij czegoś. Wymień 3 rzeczy, które czujesz dotykiem.' },
-  { count: 2, sense: 'czujesz zapachem', icon: '🌿', prompt: 'Wymień 2 zapachy wokół siebie.' },
-  { count: 1, sense: 'czujesz smakiem', icon: '💧', prompt: 'Wymień 1 smak, który teraz czujesz.' },
+  { count: 5, icon: '👁', prompt: 'Rozejrzyj się. Wymień 5 rzeczy, które widzisz.' },
+  { count: 4, icon: '👂', prompt: 'Wsłuchaj się. Wymień 4 dźwięki, które słyszysz.' },
+  { count: 3, icon: '🤲', prompt: 'Dotknij czegoś. Wymień 3 rzeczy, które czujesz dotykiem.' },
+  { count: 2, icon: '🌿', prompt: 'Wymień 2 zapachy wokół siebie.' },
+  { count: 1, icon: '💧', prompt: 'Wymień 1 smak, który teraz czujesz.' },
 ]
 
 function GroundingExercise() {
@@ -130,7 +183,6 @@ function GroundingExercise() {
 
   return (
     <div className="py-6">
-      {/* Pasek postępu */}
       <div className="flex gap-2 mb-8 px-4">
         {groundingSteps.map((_, i) => (
           <div
@@ -169,11 +221,11 @@ function GroundingExercise() {
   )
 }
 
-// ─── Główny ekran Stan Czerwony ───
+// ─── Główny ekran ───
 export default function StanCzerwony({ navigate }) {
   const audioRef = useRef(null)
   const [playing, setPlaying] = useState(false)
-  const [activeSection, setActiveSection] = useState(null) // 'breathing' | 'grounding' | null
+  const [activeSection, setActiveSection] = useState(null)
 
   const toggleAudio = () => {
     if (!audioRef.current) return
@@ -195,8 +247,7 @@ export default function StanCzerwony({ navigate }) {
         <span>Wróć</span>
       </button>
 
-      {/* Brown noise / deszcz */}
-      <audio ref={audioRef} src="/rain.mp3" loop preload="auto" />
+      <audio ref={audioRef} src="/storm.wav" loop preload="auto" />
 
       <button
         onClick={toggleAudio}
@@ -212,15 +263,32 @@ export default function StanCzerwony({ navigate }) {
         </span>
       </button>
 
-      {/* Tekst uziemiający */}
+      {/* Tekst uziemiający — sekwencyjne pojawianie się */}
       <div className="text-center mb-8 space-y-4">
-        <p className="text-3xl font-light leading-relaxed">Oddychaj.</p>
-        <p className="text-2xl font-light leading-relaxed text-zinc-400">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="text-3xl font-light leading-relaxed"
+        >
+          Oddychaj.
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
+          className="text-2xl font-light leading-relaxed text-zinc-400"
+        >
           To tylko echo przeszłości.
-        </p>
-        <p className="text-2xl font-light leading-relaxed text-zinc-300">
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3.0, duration: 0.8 }}
+          className="text-2xl font-light leading-relaxed text-zinc-300"
+        >
           Jesteś bezpieczna.
-        </p>
+        </motion.p>
       </div>
 
       {/* Narzędzia somatyczne */}
@@ -249,7 +317,6 @@ export default function StanCzerwony({ navigate }) {
         </button>
       </div>
 
-      {/* Sekcja aktywnego narzędzia */}
       <AnimatePresence mode="wait">
         {activeSection === 'breathing' && (
           <motion.div
@@ -281,7 +348,6 @@ export default function StanCzerwony({ navigate }) {
         )}
       </AnimatePresence>
 
-      {/* Spotify */}
       <div className="mb-6">
         <iframe
           className="w-full rounded-2xl border border-zinc-800"
@@ -293,7 +359,6 @@ export default function StanCzerwony({ navigate }) {
         />
       </div>
 
-      {/* YouTube */}
       <div>
         <iframe
           className="w-full aspect-video rounded-2xl border border-zinc-800"
