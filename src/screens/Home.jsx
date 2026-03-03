@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Trophy,
@@ -8,6 +8,8 @@ import {
   EyeOff,
   ShieldAlert,
   Phone,
+  Mic,
+  MicOff,
 } from 'lucide-react'
 
 // Kolejność: od najbardziej pozytywnych do kryzysowych
@@ -65,14 +67,53 @@ function getGreeting() {
   return 'Hej, Marta.'
 }
 
-export default function Home({ navigate }) {
+export default function Home({ navigate, micEnabled, toggleMic }) {
   const [showCheckIn, setShowCheckIn] = useState(false)
+
+  // ─── Long-press na nagłówek → Panel Piotrka ───
+  const longPressTimer = useRef(null)
+
+  const handlePressStart = useCallback(() => {
+    longPressTimer.current = setTimeout(() => {
+      navigate('panel-piotrka')
+    }, 3000)
+  }, [navigate])
+
+  const handlePressEnd = useCallback(() => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current)
+      longPressTimer.current = null
+    }
+  }, [])
 
   return (
     <div className="px-4 py-8 max-w-lg mx-auto h-dvh flex flex-col">
-      <h1 className="text-2xl font-light mb-2 tracking-tight px-1">
-        {getGreeting()}
-      </h1>
+      <div className="flex items-center justify-between mb-2 px-1">
+        <h1
+          className="text-2xl font-light tracking-tight select-none"
+          onTouchStart={handlePressStart}
+          onTouchEnd={handlePressEnd}
+          onTouchCancel={handlePressEnd}
+          onMouseDown={handlePressStart}
+          onMouseUp={handlePressEnd}
+          onMouseLeave={handlePressEnd}
+        >
+          {getGreeting()}
+        </h1>
+
+        {/* Mic toggle */}
+        <button
+          onClick={toggleMic}
+          className="p-2 rounded-xl active:scale-[0.93] transition-transform"
+          aria-label={micEnabled ? 'Wyłącz monitoring głośności' : 'Włącz monitoring głośności'}
+        >
+          {micEnabled ? (
+            <Mic className="w-5 h-5 text-emerald-500/60" strokeWidth={1.5} />
+          ) : (
+            <MicOff className="w-5 h-5 text-zinc-700" strokeWidth={1.5} />
+          )}
+        </button>
+      </div>
 
       <button
         onClick={() => setShowCheckIn(!showCheckIn)}

@@ -46,7 +46,7 @@ export default function SloikSukcesow({ navigate }) {
         <div className="flex items-start gap-4">
           <Crown className="w-8 h-8 text-amber-400 shrink-0 mt-0.5" strokeWidth={1.5} />
           <p className="text-xl text-amber-200 font-light leading-relaxed">
-            Przeżyłam. Mój syn jest dobrze wychowany.
+            Przeżyłam i nasz syn ma rozwiniętą inteligencję emocjonalną.
           </p>
         </div>
       </div>

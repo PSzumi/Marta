@@ -37,7 +37,7 @@ function BreathingGuide() {
       timers.push(setTimeout(() => {
         if (!mounted) return
         runCycle()
-      }, 8000)) // po pauzie (1.2s) → nowy cykl
+      }, 7200)) // po pauzie (0.4s) → nowy cykl
     }
 
     runCycle()
@@ -348,25 +348,14 @@ export default function StanCzerwony({ navigate }) {
         )}
       </AnimatePresence>
 
-      <div className="mb-6">
+      <div>
         <iframe
           className="w-full rounded-2xl border border-zinc-800"
           style={{ height: '152px' }}
-          src="https://open.spotify.com/embed/playlist/37i9dQZF1DWZd79rJ6a7lp?utm_source=generator&theme=0"
+          src="https://open.spotify.com/embed/playlist/1UkBGhGeJcMRuwQgwvLPNU?utm_source=generator&theme=0"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
-          title="Spotify – relaksacja"
-        />
-      </div>
-
-      <div>
-        <iframe
-          className="w-full aspect-video rounded-2xl border border-zinc-800"
-          src="https://www.youtube-nocookie.com/embed/jfKfPfyJRdk"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          loading="lazy"
-          title="YouTube – relaksacja"
+          title="Spotify – playlista Marty"
         />
       </div>
     </div>
