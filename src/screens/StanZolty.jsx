@@ -22,7 +22,8 @@ const PHONE_NUMBER = '48502112113'
 const waLink = (text) =>
   `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(text)}`
 
-export default function StanZolty({ navigate }) {
+export default function StanZolty({ navigate, settings }) {
+  const spotifyId = settings?.spotifyPlaylistId || '37i9dQZF1DXdPec7aLTmlC'
   return (
     <div className="px-6 py-8 max-w-lg mx-auto">
       <button
@@ -78,7 +79,7 @@ export default function StanZolty({ navigate }) {
         <iframe
           className="w-full rounded-2xl border border-zinc-800"
           style={{ height: '152px' }}
-          src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdPec7aLTmlC?utm_source=generator&theme=0"
+          src={`https://open.spotify.com/embed/playlist/${spotifyId}?utm_source=generator&theme=0`}
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
           title="Spotify – energia"

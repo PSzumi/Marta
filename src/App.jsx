@@ -10,9 +10,12 @@ import StanZielony from './screens/StanZielony'
 import ZdejmijZbroje from './screens/ZdejmijZbroje'
 import PanelPiotrka from './screens/PanelPiotrka'
 import Logowanie from './screens/Logowanie'
+import Onboarding from './screens/Onboarding'
+import Ustawienia from './screens/Ustawienia'
 import { useRealtimeChannel } from './lib/realtime'
 import { useLoudnessDetector } from './lib/loudness'
 import { useAuth } from './hooks/useAuth'
+import { getSettings } from './lib/userSettings'
 
 const pageTransition = {
   initial: { opacity: 0, y: 12 },
@@ -24,6 +27,15 @@ const pageTransition = {
 function App() {
   const { user, loading, signOut } = useAuth()
   const [screen, setScreen] = useState('home')
+
+  // ─── Ustawienia użytkownika (ładowane po zalogowaniu) ───
+  const [settings, setSettings] = useState(null)
+
+  useEffect(() => {
+    if (user) {
+      setSettings(getSettings(user.id))
+    }
+  }, [user])
 
   // ─── Ping popup (wiadomość od Piotrka) ───
   const [pingPopup, setPingPopup] = useState(null)
@@ -89,26 +101,35 @@ function App() {
   const renderScreen = () => {
     switch (screen) {
       case 'stan-czerwony':
-        return <StanCzerwony navigate={navigate} />
+        return <StanCzerwony navigate={navigate} settings={settings} />
       case 'niszczarka':
         return <NiszczarkaMysli navigate={navigate} />
       case 'sloik':
         return <SloikSukcesow navigate={navigate} userId={user?.id} />
       case 'stan-zolty':
-        return <StanZolty navigate={navigate} />
+        return <StanZolty navigate={navigate} settings={settings} />
       case 'stan-zielony':
         return <StanZielony navigate={navigate} />
       case 'zdejmij-zbroje':
-        return <ZdejmijZbroje navigate={navigate} />
+        return <ZdejmijZbroje navigate={navigate} settings={settings} />
       case 'panel-piotrka':
         return <PanelPiotrka navigate={navigate} />
+      case 'ustawienia':
+        return <Ustawienia navigate={navigate} userId={user?.id} onSave={() => setSettings(getSettings(user.id))} />
       default:
-        return <Home navigate={navigate} micEnabled={micEnabled} toggleMic={toggleMic} user={user} signOut={signOut} />
+        return <Home navigate={navigate} micEnabled={micEnabled} toggleMic={toggleMic} user={user} signOut={signOut} settings={settings} />
     }
   }
 
-  if (loading) return <div className="min-h-dvh bg-black" />
+  if (loading || (user && settings === null)) return <div className="min-h-dvh bg-black" />
   if (!user) return <Logowanie />
+  if (!settings?.onboardingComplete) {
+    return <Onboarding
+      userId={user.id}
+      userName={user.user_metadata?.name}
+      onComplete={() => setSettings(getSettings(user.id))}
+    />
+  }
 
   return (
     <div className="min-h-dvh bg-black text-zinc-200">

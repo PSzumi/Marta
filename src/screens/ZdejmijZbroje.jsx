@@ -1,24 +1,18 @@
 import { motion } from 'framer-motion'
 import { ArrowLeft, EyeOff } from 'lucide-react'
 
-// ─── Pula tekstów o hiperczujności ───
-// Rotacja dzienna — inny tekst każdego dnia
-const allTexts = [
-  'Jeśli Piotrek ma z czymś problem, powie Ci to sam. Nie musisz czytać w jego myślach. Możesz odpuścić.',
-  'Nie każda cisza oznacza, że coś jest nie tak. Czasem cisza to po prostu cisza. Jesteś bezpieczna.',
-  'Nie musisz skanować pokoju. Nie musisz analizować tonu głosu. Nikt tutaj nie jest zagrożeniem. Możesz się rozluźnić.',
-  'To, że potrafisz czytać ludzi — to Twoja siła. Ale teraz nie musisz jej używać. Nikt tu nie planuje wybuchu.',
-  'Piotrek nie jest Twoją mamą. Piotrek nie jest Twoim ojcem. Piotrek jest Piotrkiem. I on jest po Twojej stronie.',
-]
+import { DEFAULTS } from '../lib/userSettings'
 
-function getDailyText() {
+function getDailyText(texts) {
+  if (!texts?.length) return ''
   const today = new Date()
   const dayIndex = today.getFullYear() * 366 + today.getMonth() * 31 + today.getDate()
-  return allTexts[dayIndex % allTexts.length]
+  return texts[dayIndex % texts.length]
 }
 
-export default function ZdejmijZbroje({ navigate }) {
-  const text = getDailyText()
+export default function ZdejmijZbroje({ navigate, settings }) {
+  const affirmations = settings?.affirmations?.length ? settings.affirmations : DEFAULTS.affirmations
+  const text = getDailyText(affirmations)
 
   return (
     <div className="px-6 py-8 max-w-lg mx-auto min-h-dvh flex flex-col">

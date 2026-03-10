@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, Volume2, VolumeX, Wind, Eye } from 'lucide-react'
+import { DEFAULTS } from '../lib/userSettings'
 
 // ─── Animowany przewodnik oddechowy ───
 // Fizjologiczne westchnienie (physiological sigh):
@@ -222,10 +223,13 @@ function GroundingExercise() {
 }
 
 // ─── Główny ekran ───
-export default function StanCzerwony({ navigate }) {
+export default function StanCzerwony({ navigate, settings }) {
   const audioRef = useRef(null)
   const [playing, setPlaying] = useState(false)
   const [activeSection, setActiveSection] = useState(null)
+
+  const sentences = settings?.calmingSentences?.length ? settings.calmingSentences : DEFAULTS.calmingSentences
+  const spotifyId = settings?.spotifyPlaylistId || '1UkBGhGeJcMRuwQgwvLPNU'
 
   const toggleAudio = () => {
     if (!audioRef.current) return
@@ -265,30 +269,19 @@ export default function StanCzerwony({ navigate }) {
 
       {/* Tekst uziemiający — sekwencyjne pojawianie się */}
       <div className="text-center mb-8 space-y-4">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="text-3xl font-light leading-relaxed"
-        >
-          Oddychaj.
-        </motion.p>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
-          className="text-2xl font-light leading-relaxed text-zinc-400"
-        >
-          To tylko echo przeszłości.
-        </motion.p>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 3.0, duration: 0.8 }}
-          className="text-2xl font-light leading-relaxed text-zinc-300"
-        >
-          Jesteś bezpieczna.
-        </motion.p>
+        {sentences.map((s, i) => (
+          <motion.p
+            key={i}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: i === 0 ? 0.3 : i * 1.5, duration: 0.8 }}
+            className={`font-light leading-relaxed ${
+              i === 0 ? 'text-3xl' : 'text-2xl text-zinc-400'
+            }`}
+          >
+            {s}
+          </motion.p>
+        ))}
       </div>
 
       {/* Narzędzia somatyczne */}
@@ -352,7 +345,7 @@ export default function StanCzerwony({ navigate }) {
         <iframe
           className="w-full rounded-2xl border border-zinc-800"
           style={{ height: '152px' }}
-          src="https://open.spotify.com/embed/playlist/1UkBGhGeJcMRuwQgwvLPNU?utm_source=generator&theme=0"
+          src={`https://open.spotify.com/embed/playlist/${spotifyId}?utm_source=generator&theme=0`}
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
           title="Spotify – playlista Marty"

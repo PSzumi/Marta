@@ -11,6 +11,7 @@ import {
   Mic,
   MicOff,
   LogOut,
+  Settings,
 } from 'lucide-react'
 
 // Kolejność: od najbardziej pozytywnych do kryzysowych
@@ -69,7 +70,7 @@ function getGreeting(name) {
   return `Hej, ${firstName}.`
 }
 
-export default function Home({ navigate, micEnabled, toggleMic, user, signOut }) {
+export default function Home({ navigate, micEnabled, toggleMic, user, signOut, settings }) {
   const [showCheckIn, setShowCheckIn] = useState(false)
 
   // ─── Long-press na nagłówek → Panel Piotrka ───
@@ -115,6 +116,15 @@ export default function Home({ navigate, micEnabled, toggleMic, user, signOut })
             ) : (
               <MicOff className="w-5 h-5 text-zinc-700" strokeWidth={1.5} />
             )}
+          </button>
+
+          {/* Settings */}
+          <button
+            onClick={() => navigate('ustawienia')}
+            className="p-2 rounded-xl active:scale-[0.93] transition-transform"
+            aria-label="Ustawienia"
+          >
+            <Settings className="w-5 h-5 text-zinc-700" strokeWidth={1.5} />
           </button>
 
           {/* Sign out */}
