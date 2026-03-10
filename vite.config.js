@@ -16,8 +16,8 @@ export default defineConfig({
         name: 'Przystań',
         short_name: 'Przystań',
         description: 'Twoje bezpieczne miejsce.',
-        theme_color: '#000000',
-        background_color: '#000000',
+        theme_color: '#0e0c11',
+        background_color: '#0e0c11',
         display: 'standalone',
         start_url: '/',
         icons: [

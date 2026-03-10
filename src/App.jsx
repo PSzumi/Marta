@@ -121,7 +121,7 @@ function App() {
     }
   }
 
-  if (loading || (user && settings === null)) return <div className="min-h-dvh bg-black" />
+  if (loading || (user && settings === null)) return <div className="min-h-dvh bg-[#0e0c11]" />
   if (!user) return <Logowanie />
   if (!settings?.onboardingComplete) {
     return <Onboarding
@@ -132,7 +132,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-dvh bg-black text-zinc-200">
+    <div className="min-h-dvh bg-[#0e0c11] text-[#f0ecf5]">
       {/* Hidden audio for remote play */}
       <audio ref={audioRef} src="/storm.wav" loop preload="auto" />
 
@@ -154,7 +154,7 @@ function App() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-6"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0e0c11]/80 px-6"
             onClick={() => setPingPopup(null)}
           >
             <motion.div
@@ -162,16 +162,16 @@ function App() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
-              className="bg-zinc-900 rounded-3xl p-8 max-w-sm w-full text-center border border-zinc-800"
+              className="bg-[#1c1824] rounded-3xl p-8 max-w-sm w-full text-center border border-[#2f2a3a]"
               onClick={(e) => e.stopPropagation()}
             >
               <Heart className="w-10 h-10 text-rose-400/60 mx-auto mb-4" strokeWidth={1.5} />
-              <p className="text-xl text-zinc-200 font-light leading-relaxed mb-6">
+              <p className="text-xl text-[#f0ecf5] font-light leading-relaxed mb-6">
                 {pingPopup}
               </p>
               <button
                 onClick={() => setPingPopup(null)}
-                className="bg-zinc-800 rounded-2xl px-8 py-3 text-zinc-300 active:scale-[0.97] transition-transform"
+                className="bg-[#261f30] rounded-2xl px-8 py-3 text-[#d4cde0] active:scale-[0.97] transition-transform"
               >
                 OK
               </button>
@@ -188,19 +188,19 @@ function App() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-6"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0e0c11]/80 px-6"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.4 }}
-              className="bg-zinc-900 rounded-3xl p-8 max-w-sm w-full text-center border border-zinc-800"
+              className="bg-[#1c1824] rounded-3xl p-8 max-w-sm w-full text-center border border-[#2f2a3a]"
             >
-              <p className="text-2xl text-zinc-200 font-light leading-relaxed mb-2">
+              <p className="text-2xl text-[#f0ecf5] font-light leading-relaxed mb-2">
                 Hej...
               </p>
-              <p className="text-lg text-zinc-400 font-light leading-relaxed mb-8">
+              <p className="text-lg text-[#a99db8] font-light leading-relaxed mb-8">
                 Trochę głośno. Chcesz się na chwilę zatrzymać?
               </p>
               <div className="flex gap-3">
@@ -209,14 +209,14 @@ function App() {
                     setLoudPopup(false)
                     navigate('stan-czerwony')
                   }}
-                  className="flex-1 bg-zinc-800 rounded-2xl py-3 flex items-center justify-center gap-2 text-zinc-300 active:scale-[0.97] transition-transform"
+                  className="flex-1 bg-[#261f30] rounded-2xl py-3 flex items-center justify-center gap-2 text-[#d4cde0] active:scale-[0.97] transition-transform"
                 >
                   <Wind className="w-5 h-5 text-blue-400/60" strokeWidth={1.5} />
                   <span>Oddech</span>
                 </button>
                 <button
                   onClick={() => setLoudPopup(false)}
-                  className="flex-1 bg-zinc-800 rounded-2xl py-3 text-zinc-400 active:scale-[0.97] transition-transform"
+                  className="flex-1 bg-[#261f30] rounded-2xl py-3 text-[#a99db8] active:scale-[0.97] transition-transform"
                 >
                   OK
                 </button>

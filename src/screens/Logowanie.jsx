@@ -75,7 +75,7 @@ export default function Logowanie() {
   }
 
   return (
-    <div className="min-h-dvh bg-black flex flex-col items-center justify-center px-6 py-10">
+    <div className="min-h-dvh bg-[#0e0c11] flex flex-col items-center justify-center px-6 py-10">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -83,22 +83,22 @@ export default function Logowanie() {
         className="w-full max-w-sm"
       >
         {/* Logo */}
-        <p className="text-zinc-600 text-xs tracking-widest uppercase text-center mb-6">
+        <p className="text-[#554a63] text-xs tracking-widest uppercase text-center mb-6">
           Przystań
         </p>
 
         {/* Heading */}
-        <h1 className="text-3xl font-light text-zinc-200 text-center mb-8">
+        <h1 className="text-3xl font-light text-[#f0ecf5] text-center mb-8">
           {mode === 'login' ? 'Witaj z powrotem.' : 'Utwórz konto.'}
         </h1>
 
         {/* Tab toggle */}
-        <div className="flex bg-zinc-900 rounded-2xl p-1 mb-6">
+        <div className="flex bg-[#1c1824] rounded-2xl p-1 mb-6">
           <button
             type="button"
             onClick={() => switchMode('login')}
             className={`flex-1 py-2.5 rounded-xl text-sm transition-colors ${
-              mode === 'login' ? 'bg-zinc-700 text-zinc-100' : 'text-zinc-500'
+              mode === 'login' ? 'bg-[#2f2a3a] text-zinc-100' : 'text-[#6b5f7a]'
             }`}
           >
             Zaloguj się
@@ -107,7 +107,7 @@ export default function Logowanie() {
             type="button"
             onClick={() => switchMode('register')}
             className={`flex-1 py-2.5 rounded-xl text-sm transition-colors ${
-              mode === 'register' ? 'bg-zinc-700 text-zinc-100' : 'text-zinc-500'
+              mode === 'register' ? 'bg-[#2f2a3a] text-zinc-100' : 'text-[#6b5f7a]'
             }`}
           >
             Zarejestruj się
@@ -133,7 +133,7 @@ export default function Logowanie() {
                   placeholder="Twoje imię"
                   autoComplete="given-name"
                   required={mode === 'register'}
-                  className="w-full bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-600 transition-colors"
+                  className="w-full bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#554a63] transition-colors"
                 />
               </motion.div>
             )}
@@ -146,7 +146,7 @@ export default function Logowanie() {
             placeholder="Adres e-mail"
             autoComplete="email"
             required
-            className="bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-600 transition-colors"
+            className="bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#554a63] transition-colors"
           />
 
           <input
@@ -156,7 +156,7 @@ export default function Logowanie() {
             placeholder="Hasło"
             autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
             required
-            className="bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-600 transition-colors"
+            className="bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#554a63] transition-colors"
           />
 
           {/* Error / success */}
@@ -170,7 +170,7 @@ export default function Logowanie() {
           <button
             type="submit"
             disabled={loading}
-            className={`bg-zinc-800 text-zinc-200 rounded-2xl py-4 text-sm transition-opacity mt-1 ${
+            className={`bg-violet-900/40 border border-violet-700/50 text-[#f0ecf5] rounded-2xl py-4 text-sm transition-opacity mt-1 ${
               loading ? 'opacity-40 pointer-events-none' : 'active:scale-[0.98]'
             }`}
           >
@@ -180,23 +180,23 @@ export default function Logowanie() {
 
         {/* Separator */}
         <div className="flex items-center gap-4 my-6">
-          <div className="flex-1 h-px bg-zinc-800" />
-          <span className="text-zinc-700 text-xs">lub</span>
-          <div className="flex-1 h-px bg-zinc-800" />
+          <div className="flex-1 h-px bg-[#261f30]" />
+          <span className="text-[#3d3449] text-xs">lub</span>
+          <div className="flex-1 h-px bg-[#261f30]" />
         </div>
 
         {/* Google */}
         <button
           type="button"
           onClick={handleGoogle}
-          className="w-full flex items-center justify-center gap-3 bg-zinc-900 border border-zinc-800 rounded-2xl py-4 text-sm text-zinc-300 active:scale-[0.98] transition-transform"
+          className="w-full flex items-center justify-center gap-3 bg-[#1c1824] border border-[#2f2a3a] rounded-2xl py-4 text-sm text-[#d4cde0] active:scale-[0.98] transition-transform"
         >
           <GoogleIcon />
           Kontynuuj z Google
         </button>
 
         {/* Footer */}
-        <p className="text-zinc-700 text-xs text-center mt-10">
+        <p className="text-[#3d3449] text-xs text-center mt-10">
           Twoje dane są bezpieczne.
         </p>
       </motion.div>

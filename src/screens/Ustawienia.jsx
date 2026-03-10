@@ -67,8 +67,8 @@ export default function Ustawienia({ navigate, userId, onSave }) {
   const Section = ({ icon: Icon, title, children }) => (
     <div className="mb-8">
       <div className="flex items-center gap-2 mb-3">
-        <Icon className="w-4 h-4 text-zinc-500" strokeWidth={1.5} />
-        <h3 className="text-zinc-400 text-sm">{title}</h3>
+        <Icon className="w-4 h-4 text-[#6b5f7a]" strokeWidth={1.5} />
+        <h3 className="text-[#a99db8] text-sm">{title}</h3>
       </div>
       {children}
     </div>
@@ -78,7 +78,7 @@ export default function Ustawienia({ navigate, userId, onSave }) {
     <div className="px-6 py-8 max-w-lg mx-auto pb-20">
       <button
         onClick={() => navigate('home')}
-        className="flex items-center gap-2 text-zinc-500 mb-8 active:text-zinc-300 transition-colors"
+        className="flex items-center gap-2 text-[#6b5f7a] mb-8 active:text-[#d4cde0] transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
         <span>Wróć</span>
@@ -93,7 +93,7 @@ export default function Ustawienia({ navigate, userId, onSave }) {
           value={spotifyUrl}
           onChange={(e) => { setSpotifyUrl(e.target.value); setSpotifyError('') }}
           placeholder="https://open.spotify.com/playlist/..."
-          className="w-full bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-700 transition-colors text-sm"
+          className="w-full bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#3d3449] transition-colors text-sm"
         />
         {spotifyError && <p className="text-rose-400/80 text-sm px-1 mt-2">{spotifyError}</p>}
       </Section>
@@ -112,7 +112,7 @@ export default function Ustawienia({ navigate, userId, onSave }) {
                 setCalmingSentences(updated)
               }}
               placeholder={`Zdanie ${i + 1}...`}
-              className="w-full bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-600 transition-colors"
+              className="w-full bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#554a63] transition-colors"
             />
           ))}
         </div>
@@ -123,12 +123,12 @@ export default function Ustawienia({ navigate, userId, onSave }) {
         <div className="space-y-2 mb-3">
           {affirmations.map((aff, i) => (
             <div key={i} className="flex items-start gap-2">
-              <p className="flex-1 bg-zinc-900 rounded-2xl px-5 py-3 text-zinc-300 text-sm leading-relaxed border border-zinc-800">
+              <p className="flex-1 bg-[#1c1824] rounded-2xl px-5 py-3 text-[#d4cde0] text-sm leading-relaxed border border-[#2f2a3a]">
                 {aff}
               </p>
               <button
                 onClick={() => setAffirmations(affirmations.filter((_, idx) => idx !== i))}
-                className="p-2 text-zinc-700 active:text-zinc-400 transition-colors mt-1 shrink-0"
+                className="p-2 text-[#3d3449] active:text-[#a99db8] transition-colors mt-1 shrink-0"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -142,14 +142,14 @@ export default function Ustawienia({ navigate, userId, onSave }) {
             onChange={(e) => setNewAffirmation(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addAffirmation() } }}
             placeholder="Dodaj zdanie..."
-            className="flex-1 bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-600 transition-colors text-sm"
+            className="flex-1 bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#554a63] transition-colors text-sm"
           />
           <button
             onClick={addAffirmation}
             disabled={!newAffirmation.trim()}
-            className="bg-zinc-900 rounded-2xl px-4 border border-zinc-800 disabled:opacity-30 active:scale-95 transition-all"
+            className="bg-[#1c1824] rounded-2xl px-4 border border-[#2f2a3a] disabled:opacity-30 active:scale-95 transition-all"
           >
-            <Plus className="w-5 h-5 text-zinc-400" />
+            <Plus className="w-5 h-5 text-[#a99db8]" />
           </button>
         </div>
       </Section>
@@ -161,7 +161,7 @@ export default function Ustawienia({ navigate, userId, onSave }) {
           onChange={(e) => setCrownSuccess(e.target.value)}
           rows={3}
           placeholder="Twój największy sukces..."
-          className="w-full bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-700 transition-colors resize-none"
+          className="w-full bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#3d3449] transition-colors resize-none"
         />
       </Section>
 
@@ -173,14 +173,14 @@ export default function Ustawienia({ navigate, userId, onSave }) {
             value={contactName}
             onChange={(e) => setContactName(e.target.value)}
             placeholder="Imię (np. Piotrek)"
-            className="w-full bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-600 transition-colors"
+            className="w-full bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#554a63] transition-colors"
           />
           <input
             type="tel"
             value={contactPhone}
             onChange={(e) => setContactPhone(e.target.value)}
             placeholder="Numer: 48XXXXXXXXX (bez + i spacji)"
-            className="w-full bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-600 transition-colors"
+            className="w-full bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#554a63] transition-colors"
           />
         </div>
       </Section>
@@ -189,7 +189,7 @@ export default function Ustawienia({ navigate, userId, onSave }) {
       <Section icon={MessageCircle} title="Szablony wiadomości (Stan Żółty)">
         <div className="space-y-3 mb-3">
           {messageTemplates.map((tmpl, i) => (
-            <div key={i} className="bg-zinc-900 rounded-2xl p-4 border border-zinc-800">
+            <div key={i} className="bg-[#1c1824] rounded-2xl p-4 border border-[#2f2a3a]">
               <div className="flex items-center gap-2 mb-2">
                 <input
                   type="text"
@@ -200,11 +200,11 @@ export default function Ustawienia({ navigate, userId, onSave }) {
                     setMessageTemplates(updated)
                   }}
                   placeholder="Etykieta (np. Bądź obok)"
-                  className="flex-1 bg-zinc-800 text-zinc-300 rounded-xl px-3 py-2 text-xs border border-zinc-700 focus:border-zinc-600 focus:outline-none placeholder:text-zinc-600"
+                  className="flex-1 bg-[#261f30] text-[#d4cde0] rounded-xl px-3 py-2 text-xs border border-[#4a4158] focus:border-zinc-600 focus:outline-none placeholder:text-[#554a63]"
                 />
                 <button
                   onClick={() => setMessageTemplates(messageTemplates.filter((_, idx) => idx !== i))}
-                  className="text-zinc-700 active:text-rose-400 transition-colors p-1"
+                  className="text-[#3d3449] active:text-rose-400 transition-colors p-1"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -218,20 +218,20 @@ export default function Ustawienia({ navigate, userId, onSave }) {
                   setMessageTemplates(updated)
                 }}
                 placeholder="Treść wiadomości..."
-                className="w-full bg-zinc-800 text-zinc-300 rounded-xl px-3 py-2 text-sm border border-zinc-700 focus:border-zinc-600 focus:outline-none placeholder:text-zinc-600"
+                className="w-full bg-[#261f30] text-[#d4cde0] rounded-xl px-3 py-2 text-sm border border-[#4a4158] focus:border-zinc-600 focus:outline-none placeholder:text-[#554a63]"
               />
             </div>
           ))}
         </div>
 
         {/* Add template */}
-        <div className="bg-zinc-900 rounded-2xl p-4 border border-zinc-800 border-dashed space-y-2">
+        <div className="bg-[#1c1824] rounded-2xl p-4 border border-[#2f2a3a] border-dashed space-y-2">
           <input
             type="text"
             value={newTemplate.label}
             onChange={(e) => setNewTemplate({ ...newTemplate, label: e.target.value })}
             placeholder="Etykieta (np. Potrzebuję pomocy)"
-            className="w-full bg-zinc-800 text-zinc-300 rounded-xl px-3 py-2 text-xs border border-zinc-700 focus:border-zinc-600 focus:outline-none placeholder:text-zinc-600"
+            className="w-full bg-[#261f30] text-[#d4cde0] rounded-xl px-3 py-2 text-xs border border-[#4a4158] focus:border-zinc-600 focus:outline-none placeholder:text-[#554a63]"
           />
           <div className="flex gap-2">
             <input
@@ -240,14 +240,14 @@ export default function Ustawienia({ navigate, userId, onSave }) {
               onChange={(e) => setNewTemplate({ ...newTemplate, text: e.target.value })}
               onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addTemplate() } }}
               placeholder="Treść wiadomości..."
-              className="flex-1 bg-zinc-800 text-zinc-300 rounded-xl px-3 py-2 text-sm border border-zinc-700 focus:border-zinc-600 focus:outline-none placeholder:text-zinc-600"
+              className="flex-1 bg-[#261f30] text-[#d4cde0] rounded-xl px-3 py-2 text-sm border border-[#4a4158] focus:border-zinc-600 focus:outline-none placeholder:text-[#554a63]"
             />
             <button
               onClick={addTemplate}
               disabled={!newTemplate.text.trim()}
-              className="bg-zinc-800 rounded-xl px-3 border border-zinc-700 disabled:opacity-30 active:scale-95 transition-all"
+              className="bg-[#261f30] rounded-xl px-3 border border-[#4a4158] disabled:opacity-30 active:scale-95 transition-all"
             >
-              <Plus className="w-4 h-4 text-zinc-400" />
+              <Plus className="w-4 h-4 text-[#a99db8]" />
             </button>
           </div>
         </div>
@@ -256,7 +256,7 @@ export default function Ustawienia({ navigate, userId, onSave }) {
       {/* Save */}
       <button
         onClick={handleSave}
-        className="w-full bg-zinc-800 rounded-2xl py-4 flex items-center justify-center gap-2 text-zinc-200 active:scale-[0.98] transition-transform"
+        className="w-full bg-[#261f30] rounded-2xl py-4 flex items-center justify-center gap-2 text-[#f0ecf5] active:scale-[0.98] transition-transform"
       >
         <AnimatePresence mode="wait">
           {saved ? (

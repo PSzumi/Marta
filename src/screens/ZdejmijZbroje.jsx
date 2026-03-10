@@ -18,7 +18,7 @@ export default function ZdejmijZbroje({ navigate, settings }) {
     <div className="px-6 py-8 max-w-lg mx-auto min-h-dvh flex flex-col">
       <button
         onClick={() => navigate('home')}
-        className="relative z-10 flex items-center gap-2 text-zinc-500 mb-8 active:text-zinc-300 transition-colors py-2"
+        className="relative z-10 flex items-center gap-2 text-[#6b5f7a] mb-8 active:text-[#d4cde0] transition-colors py-2"
       >
         <ArrowLeft className="w-5 h-5" />
         <span>Wróć</span>
@@ -36,14 +36,14 @@ export default function ZdejmijZbroje({ navigate, settings }) {
             ease: 'easeInOut',
           }}
         >
-          <EyeOff className="w-16 h-16 text-zinc-600" strokeWidth={1} />
+          <EyeOff className="w-16 h-16 text-[#554a63]" strokeWidth={1} />
         </motion.div>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className="text-2xl md:text-3xl font-light leading-relaxed text-zinc-300 max-w-md mt-10"
+          className="text-2xl md:text-3xl font-light leading-relaxed text-[#d4cde0] max-w-md mt-10"
         >
           {text}
         </motion.p>

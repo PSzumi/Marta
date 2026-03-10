@@ -99,7 +99,7 @@ export default function Onboarding({ userId, userName, onComplete }) {
   const StepIcon = currentStep.icon
 
   return (
-    <div className="min-h-dvh bg-black flex flex-col px-6 py-10">
+    <div className="min-h-dvh bg-[#0e0c11] flex flex-col px-6 py-10">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -109,9 +109,9 @@ export default function Onboarding({ userId, userName, onComplete }) {
         {/* Header (only step 0) */}
         {step === 0 && (
           <div className="mb-10">
-            <p className="text-zinc-600 text-xs tracking-widest uppercase mb-4">Przystań</p>
-            <h1 className="text-3xl font-light text-zinc-200 mb-2">Cześć, {firstName}.</h1>
-            <p className="text-zinc-500 font-light">Skonfigurujmy aplikację pod Ciebie. Zajmie to chwilę.</p>
+            <p className="text-[#554a63] text-xs tracking-widest uppercase mb-4">Przystań</p>
+            <h1 className="text-3xl font-light text-[#f0ecf5] mb-2">Cześć, {firstName}.</h1>
+            <p className="text-[#6b5f7a] font-light">Skonfigurujmy aplikację pod Ciebie. Zajmie to chwilę.</p>
           </div>
         )}
 
@@ -120,7 +120,7 @@ export default function Onboarding({ userId, userName, onComplete }) {
           {STEPS.map((_, i) => (
             <div
               key={i}
-              className={`h-1 flex-1 rounded-full transition-colors duration-500 ${i <= step ? 'bg-zinc-500' : 'bg-zinc-800'}`}
+              className={`h-1 flex-1 rounded-full transition-colors duration-500 ${i <= step ? 'bg-violet-400' : 'bg-[#261f30]'}`}
             />
           ))}
         </div>
@@ -136,10 +136,10 @@ export default function Onboarding({ userId, userName, onComplete }) {
             className="flex-1"
           >
             <div className="flex items-center gap-3 mb-4">
-              <StepIcon className="w-6 h-6 text-zinc-500" strokeWidth={1.5} />
-              <h2 className="text-xl font-light text-zinc-200">{currentStep.title}</h2>
+              <StepIcon className="w-6 h-6 text-[#6b5f7a]" strokeWidth={1.5} />
+              <h2 className="text-xl font-light text-[#f0ecf5]">{currentStep.title}</h2>
             </div>
-            <p className="text-zinc-500 text-sm leading-relaxed mb-6">{currentStep.subtitle}</p>
+            <p className="text-[#6b5f7a] text-sm leading-relaxed mb-6">{currentStep.subtitle}</p>
 
             {/* Step 0: Spotify */}
             {step === 0 && (
@@ -149,10 +149,10 @@ export default function Onboarding({ userId, userName, onComplete }) {
                   value={spotifyUrl}
                   onChange={(e) => { setSpotifyUrl(e.target.value); setSpotifyError('') }}
                   placeholder="https://open.spotify.com/playlist/..."
-                  className="w-full bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-700 transition-colors text-sm"
+                  className="w-full bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#3d3449] transition-colors text-sm"
                 />
                 {spotifyError && <p className="text-rose-400/80 text-sm px-1">{spotifyError}</p>}
-                <p className="text-zinc-700 text-xs px-1">Możesz pominąć — zmienisz to później w ustawieniach.</p>
+                <p className="text-[#3d3449] text-xs px-1">Możesz pominąć — zmienisz to później w ustawieniach.</p>
               </div>
             )}
 
@@ -170,10 +170,10 @@ export default function Onboarding({ userId, userName, onComplete }) {
                       setCalmingSentences(updated)
                     }}
                     placeholder={`Zdanie ${i + 1}...`}
-                    className="w-full bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-600 transition-colors"
+                    className="w-full bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#554a63] transition-colors"
                   />
                 ))}
-                <p className="text-zinc-700 text-xs px-1">Te zdania pojawią się po kolei gdy otworzysz Stan Czerwony.</p>
+                <p className="text-[#3d3449] text-xs px-1">Te zdania pojawią się po kolei gdy otworzysz Stan Czerwony.</p>
               </div>
             )}
 
@@ -183,12 +183,12 @@ export default function Onboarding({ userId, userName, onComplete }) {
                 <div className="space-y-2 max-h-48 overflow-y-auto">
                   {affirmations.map((aff, i) => (
                     <div key={i} className="flex items-start gap-2">
-                      <p className="flex-1 bg-zinc-900 rounded-2xl px-4 py-3 text-zinc-300 text-sm leading-relaxed border border-zinc-800">
+                      <p className="flex-1 bg-[#1c1824] rounded-2xl px-4 py-3 text-[#d4cde0] text-sm leading-relaxed border border-[#2f2a3a]">
                         {aff}
                       </p>
                       <button
                         onClick={() => setAffirmations(affirmations.filter((_, idx) => idx !== i))}
-                        className="p-2 text-zinc-700 active:text-zinc-400 transition-colors mt-1 shrink-0"
+                        className="p-2 text-[#3d3449] active:text-[#a99db8] transition-colors mt-1 shrink-0"
                       >
                         <X className="w-4 h-4" />
                       </button>
@@ -202,14 +202,14 @@ export default function Onboarding({ userId, userName, onComplete }) {
                     onChange={(e) => setNewAffirmation(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addAffirmation() } }}
                     placeholder="Dodaj swoje zdanie..."
-                    className="flex-1 bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-600 transition-colors text-sm"
+                    className="flex-1 bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#554a63] transition-colors text-sm"
                   />
                   <button
                     onClick={addAffirmation}
                     disabled={!newAffirmation.trim()}
-                    className="bg-zinc-900 rounded-2xl px-4 border border-zinc-800 disabled:opacity-30 active:scale-95 transition-all"
+                    className="bg-[#1c1824] rounded-2xl px-4 border border-[#2f2a3a] disabled:opacity-30 active:scale-95 transition-all"
                   >
-                    <Plus className="w-5 h-5 text-zinc-400" />
+                    <Plus className="w-5 h-5 text-[#a99db8]" />
                   </button>
                 </div>
               </div>
@@ -223,9 +223,9 @@ export default function Onboarding({ userId, userName, onComplete }) {
                   onChange={(e) => setCrownSuccess(e.target.value)}
                   rows={3}
                   placeholder="np. Skończyłam studia mimo wszystkiego..."
-                  className="w-full bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-700 transition-colors resize-none"
+                  className="w-full bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#3d3449] transition-colors resize-none"
                 />
-                <p className="text-zinc-700 text-xs px-1">Możesz pominąć i dodać później.</p>
+                <p className="text-[#3d3449] text-xs px-1">Możesz pominąć i dodać później.</p>
               </div>
             )}
 
@@ -237,16 +237,16 @@ export default function Onboarding({ userId, userName, onComplete }) {
                   value={contactName}
                   onChange={(e) => setContactName(e.target.value)}
                   placeholder="Imię (np. Piotrek)"
-                  className="w-full bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-600 transition-colors"
+                  className="w-full bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#554a63] transition-colors"
                 />
                 <input
                   type="tel"
                   value={contactPhone}
                   onChange={(e) => setContactPhone(e.target.value)}
                   placeholder="Numer: 48XXXXXXXXX (bez + i spacji)"
-                  className="w-full bg-zinc-900 text-zinc-200 rounded-2xl px-5 py-4 border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-600 transition-colors"
+                  className="w-full bg-[#1c1824] text-[#f0ecf5] rounded-2xl px-5 py-4 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#554a63] transition-colors"
                 />
-                <p className="text-zinc-600 text-xs px-1 mb-2">Szablony wiadomości (możesz edytować):</p>
+                <p className="text-[#554a63] text-xs px-1 mb-2">Szablony wiadomości (możesz edytować):</p>
                 {messageTemplates.map((tmpl, i) => (
                   <input
                     key={i}
@@ -257,7 +257,7 @@ export default function Onboarding({ userId, userName, onComplete }) {
                       updated[i] = { ...updated[i], text: e.target.value }
                       setMessageTemplates(updated)
                     }}
-                    className="w-full bg-zinc-900 text-zinc-300 rounded-2xl px-5 py-3 border border-zinc-800 focus:border-zinc-700 focus:outline-none text-sm transition-colors"
+                    className="w-full bg-[#1c1824] text-[#d4cde0] rounded-2xl px-5 py-3 border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none text-sm transition-colors"
                   />
                 ))}
               </div>
@@ -270,7 +270,7 @@ export default function Onboarding({ userId, userName, onComplete }) {
           {step > 0 ? (
             <button
               onClick={() => setStep(step - 1)}
-              className="text-zinc-600 text-sm active:text-zinc-400 transition-colors"
+              className="text-[#554a63] text-sm active:text-[#a99db8] transition-colors"
             >
               Wróć
             </button>
@@ -279,7 +279,7 @@ export default function Onboarding({ userId, userName, onComplete }) {
           )}
           <button
             onClick={handleNext}
-            className="flex items-center gap-2 bg-zinc-800 rounded-2xl px-6 py-3 text-zinc-200 text-sm active:scale-[0.98] transition-transform"
+            className="flex items-center gap-2 bg-violet-800/60 rounded-2xl px-6 py-3 text-[#f0ecf5] text-sm active:scale-[0.98] transition-transform"
           >
             {step < STEPS.length - 1 ? (<>Dalej <ChevronRight className="w-4 h-4" /></>) : 'Gotowe'}
           </button>
@@ -288,7 +288,7 @@ export default function Onboarding({ userId, userName, onComplete }) {
         {step === 0 && (
           <button
             onClick={finish}
-            className="text-zinc-700 text-xs text-center mt-4 active:text-zinc-500 transition-colors"
+            className="text-[#3d3449] text-xs text-center mt-4 active:text-[#6b5f7a] transition-colors"
           >
             Pomiń konfigurację
           </button>

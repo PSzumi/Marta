@@ -163,22 +163,22 @@ export default function StanZielony({ navigate }) {
     <div className="px-6 py-8 max-w-lg mx-auto">
       <button
         onClick={() => navigate('home')}
-        className="flex items-center gap-2 text-zinc-500 mb-8 active:text-zinc-300 transition-colors"
+        className="flex items-center gap-2 text-[#6b5f7a] mb-8 active:text-[#d4cde0] transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
         <span>Wróć</span>
       </button>
 
       <h2 className="text-2xl font-light mb-2">Stan Zielony</h2>
-      <p className="text-zinc-600 text-sm mb-8">Dzisiejsze fiszki dla Ciebie</p>
+      <p className="text-[#554a63] text-sm mb-8">Dzisiejsze fiszki dla Ciebie</p>
 
       <div className="space-y-6">
         {cards.map((card, i) => {
           const Icon = card.icon
           return (
-            <div key={i} className="bg-zinc-900 rounded-2xl p-8">
+            <div key={i} className="bg-[#1c1824] rounded-2xl p-8">
               <Icon className="w-10 h-10 text-emerald-400/50 mb-5" strokeWidth={1.5} />
-              <p className="text-xl leading-relaxed text-zinc-300">
+              <p className="text-xl leading-relaxed text-[#d4cde0]">
                 {card.text}
               </p>
             </div>

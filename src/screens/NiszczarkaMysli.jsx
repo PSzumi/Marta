@@ -43,14 +43,14 @@ export default function NiszczarkaMysli({ navigate }) {
     <div className="px-6 py-8 max-w-lg mx-auto">
       <button
         onClick={() => navigate('home')}
-        className="flex items-center gap-2 text-zinc-500 mb-8 active:text-zinc-300 transition-colors"
+        className="flex items-center gap-2 text-[#6b5f7a] mb-8 active:text-[#d4cde0] transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
         <span>Wróć</span>
       </button>
 
       <h2 className="text-2xl font-light mb-2">Niszczarka Myśli</h2>
-      <p className="text-zinc-500 mb-8">
+      <p className="text-[#6b5f7a] mb-8">
         Cokolwiek tu wpiszesz, zostanie spalone. Nigdzie nie jest zapisywane.
       </p>
 
@@ -61,12 +61,12 @@ export default function NiszczarkaMysli({ navigate }) {
           onChange={(e) => setText(e.target.value)}
           placeholder="Wyrzuć to z siebie..."
           rows={6}
-          className="w-full bg-zinc-900 text-zinc-200 text-lg rounded-2xl p-6 resize-none border border-zinc-800 focus:border-zinc-700 focus:outline-none placeholder:text-zinc-600 transition-colors"
+          className="w-full bg-[#1c1824] text-[#f0ecf5] text-lg rounded-2xl p-6 resize-none border border-[#2f2a3a] focus:border-[#4a4158] focus:outline-none placeholder:text-[#554a63] transition-colors"
         />
 
         {burning && (
           <div
-            className="absolute inset-0 bg-zinc-900 rounded-2xl p-6 overflow-hidden pointer-events-none"
+            className="absolute inset-0 bg-[#1c1824] rounded-2xl p-6 overflow-hidden pointer-events-none"
             aria-hidden="true"
           >
             <div className="animate-fire text-lg whitespace-pre-wrap break-words">
@@ -79,13 +79,13 @@ export default function NiszczarkaMysli({ navigate }) {
       <button
         onClick={handleDestroy}
         disabled={!text.trim() || burning}
-        className="mt-6 w-full bg-zinc-900 rounded-2xl p-5 flex items-center justify-center gap-3 text-xl disabled:opacity-30 active:scale-[0.98] transition-all duration-150"
+        className="mt-6 w-full bg-[#1c1824] rounded-2xl p-5 flex items-center justify-center gap-3 text-xl disabled:opacity-30 active:scale-[0.98] transition-all duration-150"
       >
         <Flame
-          className={`w-6 h-6 ${text.trim() && !burning ? 'text-orange-400/70' : 'text-zinc-600'}`}
+          className={`w-6 h-6 ${text.trim() && !burning ? 'text-orange-400/70' : 'text-[#554a63]'}`}
           strokeWidth={1.5}
         />
-        <span className={text.trim() && !burning ? 'text-zinc-200' : 'text-zinc-600'}>
+        <span className={text.trim() && !burning ? 'text-[#f0ecf5]' : 'text-[#554a63]'}>
           Zniszcz
         </span>
       </button>
@@ -97,7 +97,7 @@ export default function NiszczarkaMysli({ navigate }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="text-center text-zinc-500 mt-8 text-lg font-light"
+            className="text-center text-[#6b5f7a] mt-8 text-lg font-light"
           >
             Pozbyłaś się tego. Nie musisz tego więcej nosić.
           </motion.p>

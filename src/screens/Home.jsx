@@ -21,36 +21,42 @@ const buttons = [
     label: 'Słoik Sukcesów',
     icon: Trophy,
     accent: 'text-amber-400/60',
+    bg: 'bg-amber-950/30 border-amber-800/30',
   },
   {
     id: 'stan-zolty',
     label: 'Stan Żółty',
     icon: Sun,
     accent: 'text-yellow-400/60',
+    bg: 'bg-yellow-950/20 border-yellow-800/20',
   },
   {
     id: 'stan-zielony',
     label: 'Stan Zielony',
     icon: BookOpen,
     accent: 'text-emerald-400/60',
+    bg: 'bg-emerald-950/20 border-emerald-800/20',
   },
   {
     id: 'niszczarka',
     label: 'Niszczarka Myśli',
     icon: Flame,
     accent: 'text-orange-400/60',
+    bg: 'bg-orange-950/20 border-orange-800/20',
   },
   {
     id: 'zdejmij-zbroje',
     label: 'Możesz Odpuścić',
     icon: EyeOff,
     accent: 'text-sky-400/60',
+    bg: 'bg-violet-950/20 border-violet-800/20',
   },
   {
     id: 'stan-czerwony',
     label: 'Stan Czerwony',
     icon: ShieldAlert,
     accent: 'text-red-400/60',
+    bg: 'bg-rose-950/20 border-rose-800/20',
   },
 ]
 
@@ -114,7 +120,7 @@ export default function Home({ navigate, micEnabled, toggleMic, user, signOut, s
             {micEnabled ? (
               <Mic className="w-5 h-5 text-emerald-500/60" strokeWidth={1.5} />
             ) : (
-              <MicOff className="w-5 h-5 text-zinc-700" strokeWidth={1.5} />
+              <MicOff className="w-5 h-5 text-[#3d3449]" strokeWidth={1.5} />
             )}
           </button>
 
@@ -124,7 +130,7 @@ export default function Home({ navigate, micEnabled, toggleMic, user, signOut, s
             className="p-2 rounded-xl active:scale-[0.93] transition-transform"
             aria-label="Ustawienia"
           >
-            <Settings className="w-5 h-5 text-zinc-700" strokeWidth={1.5} />
+            <Settings className="w-5 h-5 text-[#3d3449]" strokeWidth={1.5} />
           </button>
 
           {/* Sign out */}
@@ -133,14 +139,14 @@ export default function Home({ navigate, micEnabled, toggleMic, user, signOut, s
             className="p-2 rounded-xl active:scale-[0.93] transition-transform"
             aria-label="Wyloguj się"
           >
-            <LogOut className="w-5 h-5 text-zinc-700" strokeWidth={1.5} />
+            <LogOut className="w-5 h-5 text-[#3d3449]" strokeWidth={1.5} />
           </button>
         </div>
       </div>
 
       <button
         onClick={() => setShowCheckIn(!showCheckIn)}
-        className="text-zinc-600 text-sm mb-4 block px-1 text-left"
+        className="text-[#554a63] text-sm mb-4 block px-1 text-left"
       >
         {showCheckIn ? 'Schowaj' : 'Co mówi Ci teraz ciało?'}
       </button>
@@ -159,7 +165,7 @@ export default function Home({ navigate, micEnabled, toggleMic, user, signOut, s
                 <button
                   key={opt.label}
                   onClick={() => navigate(opt.target)}
-                  className="bg-zinc-900 rounded-xl p-3 text-sm text-zinc-400 text-center active:scale-[0.97] transition-transform"
+                  className="bg-[#1c1824] rounded-xl p-3 text-sm text-[#a99db8] text-center active:scale-[0.97] transition-transform"
                 >
                   {opt.label}
                 </button>
@@ -170,14 +176,14 @@ export default function Home({ navigate, micEnabled, toggleMic, user, signOut, s
       </AnimatePresence>
 
       <div className="grid grid-cols-2 gap-3 flex-1">
-        {buttons.map(({ id, label, icon: Icon, accent }) => (
+        {buttons.map(({ id, label, icon: Icon, accent, bg }) => (
           <button
             key={id}
             onClick={() => navigate(id)}
-            className="bg-zinc-900 rounded-2xl p-4 flex flex-col items-center justify-center gap-3 text-center active:scale-[0.97] transition-transform duration-150"
+            className={`${bg} border rounded-2xl p-4 flex flex-col items-center justify-center gap-3 text-center active:scale-[0.97] transition-transform duration-150`}
           >
             <Icon className={`w-8 h-8 ${accent}`} strokeWidth={1.5} />
-            <span className="text-sm text-zinc-300 leading-tight">{label}</span>
+            <span className="text-sm text-[#d4cde0] leading-tight">{label}</span>
           </button>
         ))}
       </div>
@@ -185,7 +191,7 @@ export default function Home({ navigate, micEnabled, toggleMic, user, signOut, s
       <div className="pt-4 text-center">
         <a
           href="tel:116123"
-          className="inline-flex items-center gap-2 text-zinc-700 text-xs active:text-zinc-500 transition-colors"
+          className="inline-flex items-center gap-2 text-[#3d3449] text-xs active:text-[#6b5f7a] transition-colors"
         >
           <Phone className="w-3.5 h-3.5" strokeWidth={1.5} />
           <span>Telefon Zaufania: 116 123</span>

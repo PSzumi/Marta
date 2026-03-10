@@ -63,7 +63,7 @@ export default function PanelPiotrka({ navigate }) {
     <div className="px-4 py-8 max-w-lg mx-auto min-h-dvh flex flex-col">
       <button
         onClick={() => navigate('home')}
-        className="flex items-center gap-2 text-zinc-500 mb-6 active:text-zinc-300 transition-colors"
+        className="flex items-center gap-2 text-[#6b5f7a] mb-6 active:text-[#d4cde0] transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
         <span>Wróć</span>
@@ -89,21 +89,21 @@ export default function PanelPiotrka({ navigate }) {
             key={id}
             onClick={() => handleAction(payload)}
             disabled={!connected}
-            className={`bg-zinc-900 rounded-2xl p-5 flex flex-col items-center justify-center gap-3 text-center active:scale-[0.97] transition-all duration-150 disabled:opacity-30 ${
+            className={`bg-[#1c1824] rounded-2xl p-5 flex flex-col items-center justify-center gap-3 text-center active:scale-[0.97] transition-all duration-150 disabled:opacity-30 ${
               sent === (payload.screen || payload.action) ? 'ring-1 ring-zinc-600' : ''
             }`}
           >
             <Icon className={`w-8 h-8 ${accent}`} strokeWidth={1.5} />
-            <span className="text-sm text-zinc-300 leading-tight">{label}</span>
+            <span className="text-sm text-[#d4cde0] leading-tight">{label}</span>
           </button>
         ))}
       </div>
 
       {/* Custom message */}
-      <div className="bg-zinc-900 rounded-2xl p-5">
+      <div className="bg-[#1c1824] rounded-2xl p-5">
         <div className="flex items-center gap-2 mb-3">
-          <MessageCircle className="w-5 h-5 text-zinc-500" strokeWidth={1.5} />
-          <span className="text-sm text-zinc-400">Wiadomość dla Marty</span>
+          <MessageCircle className="w-5 h-5 text-[#6b5f7a]" strokeWidth={1.5} />
+          <span className="text-sm text-[#a99db8]">Wiadomość dla Marty</span>
         </div>
         <div className="flex gap-3">
           <input
@@ -113,14 +113,14 @@ export default function PanelPiotrka({ navigate }) {
             onKeyDown={(e) => e.key === 'Enter' && handleMessage()}
             placeholder="Napisz coś..."
             disabled={!connected}
-            className="flex-1 bg-zinc-800 text-zinc-200 rounded-xl px-4 py-3 border border-zinc-700 focus:border-zinc-600 focus:outline-none placeholder:text-zinc-600 transition-colors disabled:opacity-30"
+            className="flex-1 bg-[#261f30] text-[#f0ecf5] rounded-xl px-4 py-3 border border-[#4a4158] focus:border-zinc-600 focus:outline-none placeholder:text-[#554a63] transition-colors disabled:opacity-30"
           />
           <button
             onClick={handleMessage}
             disabled={!connected || !message.trim()}
-            className="bg-zinc-800 rounded-xl px-4 border border-zinc-700 disabled:opacity-30 active:scale-95 transition-all"
+            className="bg-[#261f30] rounded-xl px-4 border border-[#4a4158] disabled:opacity-30 active:scale-95 transition-all"
           >
-            <Send className="w-5 h-5 text-zinc-400" />
+            <Send className="w-5 h-5 text-[#a99db8]" />
           </button>
         </div>
         {sent === 'message' && (
@@ -128,7 +128,7 @@ export default function PanelPiotrka({ navigate }) {
         )}
       </div>
 
-      <p className="text-zinc-700 text-xs text-center mt-auto pt-8">
+      <p className="text-[#3d3449] text-xs text-center mt-auto pt-8">
         Pingi działają gdy Marta ma otwartą aplikację
       </p>
     </div>

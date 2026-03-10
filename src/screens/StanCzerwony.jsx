@@ -133,7 +133,7 @@ function BreathingGuide() {
         </div>
       </div>
 
-      <p className="text-zinc-600 text-sm mt-6 text-center max-w-[260px]">
+      <p className="text-[#554a63] text-sm mt-6 text-center max-w-[260px]">
         Dwa krótkie wdechy nosem, jeden długi wydech ustami
       </p>
     </div>
@@ -168,11 +168,11 @@ function GroundingExercise() {
         animate={{ opacity: 1 }}
         className="text-center py-8"
       >
-        <p className="text-2xl font-light text-zinc-300 mb-3">Jesteś tutaj.</p>
-        <p className="text-zinc-500">Teraz. W tym pokoju. Bezpieczna.</p>
+        <p className="text-2xl font-light text-[#d4cde0] mb-3">Jesteś tutaj.</p>
+        <p className="text-[#6b5f7a]">Teraz. W tym pokoju. Bezpieczna.</p>
         <button
           onClick={() => { setStep(0); setDone(false) }}
-          className="mt-6 text-zinc-600 text-sm"
+          className="mt-6 text-[#554a63] text-sm"
         >
           Zacznij od nowa
         </button>
@@ -189,7 +189,7 @@ function GroundingExercise() {
           <div
             key={i}
             className={`h-1 flex-1 rounded-full transition-colors duration-500 ${
-              i <= step ? 'bg-zinc-500' : 'bg-zinc-800'
+              i <= step ? 'bg-rose-400/60' : 'bg-[#261f30]'
             }`}
           />
         ))}
@@ -205,8 +205,8 @@ function GroundingExercise() {
           className="text-center"
         >
           <div className="text-4xl mb-4">{current.icon}</div>
-          <p className="text-5xl font-light text-zinc-300 mb-4">{current.count}</p>
-          <p className="text-xl text-zinc-400 leading-relaxed max-w-sm mx-auto mb-8">
+          <p className="text-5xl font-light text-[#d4cde0] mb-4">{current.count}</p>
+          <p className="text-xl text-[#a99db8] leading-relaxed max-w-sm mx-auto mb-8">
             {current.prompt}
           </p>
         </motion.div>
@@ -214,7 +214,7 @@ function GroundingExercise() {
 
       <button
         onClick={handleNext}
-        className="w-full bg-zinc-900 rounded-2xl p-5 text-lg text-zinc-300 active:scale-[0.98] transition-transform"
+        className="w-full bg-[#1c1824] rounded-2xl p-5 text-lg text-[#d4cde0] active:scale-[0.98] transition-transform"
       >
         {step < groundingSteps.length - 1 ? 'Dalej' : 'Jestem tutaj'}
       </button>
@@ -245,7 +245,7 @@ export default function StanCzerwony({ navigate, settings }) {
     <div className="px-6 py-8 max-w-lg mx-auto">
       <button
         onClick={() => navigate('home')}
-        className="flex items-center gap-2 text-zinc-500 mb-8 active:text-zinc-300 transition-colors"
+        className="flex items-center gap-2 text-[#6b5f7a] mb-8 active:text-[#d4cde0] transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
         <span>Wróć</span>
@@ -255,14 +255,14 @@ export default function StanCzerwony({ navigate, settings }) {
 
       <button
         onClick={toggleAudio}
-        className="w-full bg-zinc-900 rounded-2xl p-6 flex items-center justify-center gap-4 mb-6 active:scale-[0.98] transition-transform"
+        className="w-full bg-[#1c1824] rounded-2xl p-6 flex items-center justify-center gap-4 mb-6 active:scale-[0.98] transition-transform"
       >
         {playing ? (
-          <VolumeX className="w-8 h-8 text-zinc-400" />
+          <VolumeX className="w-8 h-8 text-[#a99db8]" />
         ) : (
-          <Volume2 className="w-8 h-8 text-zinc-400" />
+          <Volume2 className="w-8 h-8 text-[#a99db8]" />
         )}
-        <span className="text-xl text-zinc-300">
+        <span className="text-xl text-[#d4cde0]">
           {playing ? 'Wycisz deszcz' : 'Włącz deszcz'}
         </span>
       </button>
@@ -276,7 +276,7 @@ export default function StanCzerwony({ navigate, settings }) {
             animate={{ opacity: 1 }}
             transition={{ delay: i === 0 ? 0.3 : i * 1.5, duration: 0.8 }}
             className={`font-light leading-relaxed ${
-              i === 0 ? 'text-3xl' : 'text-2xl text-zinc-400'
+              i === 0 ? 'text-3xl' : 'text-2xl text-[#a99db8]'
             }`}
           >
             {s}
@@ -290,23 +290,23 @@ export default function StanCzerwony({ navigate, settings }) {
           onClick={() => setActiveSection(activeSection === 'breathing' ? null : 'breathing')}
           className={`flex-1 rounded-2xl p-5 flex flex-col items-center gap-2 transition-colors active:scale-[0.98] ${
             activeSection === 'breathing'
-              ? 'bg-zinc-800 border border-zinc-700'
-              : 'bg-zinc-900 border border-zinc-800/50'
+              ? 'bg-[#261f30] border border-[#4a4158]'
+              : 'bg-[#1c1824] border border-[#2f2a3a]/50'
           }`}
         >
-          <Wind className="w-7 h-7 text-zinc-400" strokeWidth={1.5} />
-          <span className="text-sm text-zinc-400">Oddech</span>
+          <Wind className="w-7 h-7 text-[#a99db8]" strokeWidth={1.5} />
+          <span className="text-sm text-[#a99db8]">Oddech</span>
         </button>
         <button
           onClick={() => setActiveSection(activeSection === 'grounding' ? null : 'grounding')}
           className={`flex-1 rounded-2xl p-5 flex flex-col items-center gap-2 transition-colors active:scale-[0.98] ${
             activeSection === 'grounding'
-              ? 'bg-zinc-800 border border-zinc-700'
-              : 'bg-zinc-900 border border-zinc-800/50'
+              ? 'bg-[#261f30] border border-[#4a4158]'
+              : 'bg-[#1c1824] border border-[#2f2a3a]/50'
           }`}
         >
-          <Eye className="w-7 h-7 text-zinc-400" strokeWidth={1.5} />
-          <span className="text-sm text-zinc-400">Uziemienie</span>
+          <Eye className="w-7 h-7 text-[#a99db8]" strokeWidth={1.5} />
+          <span className="text-sm text-[#a99db8]">Uziemienie</span>
         </button>
       </div>
 
@@ -320,7 +320,7 @@ export default function StanCzerwony({ navigate, settings }) {
             transition={{ duration: 0.4, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <div className="bg-zinc-900 rounded-2xl p-6 mb-6">
+            <div className="bg-[#1c1824] rounded-2xl p-6 mb-6">
               <BreathingGuide />
             </div>
           </motion.div>
@@ -334,7 +334,7 @@ export default function StanCzerwony({ navigate, settings }) {
             transition={{ duration: 0.4, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <div className="bg-zinc-900 rounded-2xl p-6 mb-6">
+            <div className="bg-[#1c1824] rounded-2xl p-6 mb-6">
               <GroundingExercise />
             </div>
           </motion.div>
@@ -343,7 +343,7 @@ export default function StanCzerwony({ navigate, settings }) {
 
       <div>
         <iframe
-          className="w-full rounded-2xl border border-zinc-800"
+          className="w-full rounded-2xl border border-[#2f2a3a]"
           style={{ height: '152px' }}
           src={`https://open.spotify.com/embed/playlist/${spotifyId}?utm_source=generator&theme=0`}
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
