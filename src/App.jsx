@@ -105,7 +105,7 @@ function App() {
       case 'niszczarka':
         return <NiszczarkaMysli navigate={navigate} />
       case 'sloik':
-        return <SloikSukcesow navigate={navigate} userId={user?.id} />
+        return <SloikSukcesow navigate={navigate} userId={user?.id} settings={settings} onSettingsChange={() => setSettings(getSettings(user.id))} />
       case 'stan-zolty':
         return <StanZolty navigate={navigate} settings={settings} />
       case 'stan-zielony':

@@ -65,6 +65,15 @@ export function removeSuccess(id, userId) {
   return items
 }
 
+export function editSuccess(id, newText, userId) {
+  const key = storageKey(userId)
+  const items = readLocal(key).map((item) =>
+    item.id === id ? { ...item, text: newText } : item
+  )
+  writeLocal(key, items)
+  return items
+}
+
 export async function syncFromCloud(userId) {
   if (!supabase || !userId) return null
 

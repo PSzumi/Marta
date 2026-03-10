@@ -13,6 +13,14 @@ export const DEFAULTS = {
     'Nie każda cisza oznacza, że coś jest nie tak. Czasem cisza to po prostu cisza. Jesteś bezpieczna.',
     'Nie musisz skanować pokoju. Nikt tutaj nie jest zagrożeniem. Możesz się rozluźnić.',
   ],
+  crownSuccess: '',
+  contactName: '',
+  contactPhone: '',
+  messageTemplates: [
+    { label: 'Bądź obok', text: 'Potrzebuję, żebyś po prostu był/a obok mnie.' },
+    { label: 'Przyjdź do mnie', text: 'Źle się czuję. Czy możesz do mnie przyjść?' },
+    { label: 'Nie umiem mówić', text: 'Nie umiem teraz mówić, ale potrzebuję Cię.' },
+  ],
 }
 
 export function getSettings(userId) {
