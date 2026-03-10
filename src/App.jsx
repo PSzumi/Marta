@@ -9,8 +9,10 @@ import StanZolty from './screens/StanZolty'
 import StanZielony from './screens/StanZielony'
 import ZdejmijZbroje from './screens/ZdejmijZbroje'
 import PanelPiotrka from './screens/PanelPiotrka'
+import Logowanie from './screens/Logowanie'
 import { useRealtimeChannel } from './lib/realtime'
 import { useLoudnessDetector } from './lib/loudness'
+import { useAuth } from './hooks/useAuth'
 
 const pageTransition = {
   initial: { opacity: 0, y: 12 },
@@ -20,6 +22,7 @@ const pageTransition = {
 }
 
 function App() {
+  const { user, loading, signOut } = useAuth()
   const [screen, setScreen] = useState('home')
 
   // ─── Ping popup (wiadomość od Piotrka) ───
@@ -90,7 +93,7 @@ function App() {
       case 'niszczarka':
         return <NiszczarkaMysli navigate={navigate} />
       case 'sloik':
-        return <SloikSukcesow navigate={navigate} />
+        return <SloikSukcesow navigate={navigate} userId={user?.id} />
       case 'stan-zolty':
         return <StanZolty navigate={navigate} />
       case 'stan-zielony':
@@ -100,9 +103,12 @@ function App() {
       case 'panel-piotrka':
         return <PanelPiotrka navigate={navigate} />
       default:
-        return <Home navigate={navigate} micEnabled={micEnabled} toggleMic={toggleMic} />
+        return <Home navigate={navigate} micEnabled={micEnabled} toggleMic={toggleMic} user={user} signOut={signOut} />
     }
   }
+
+  if (loading) return <div className="min-h-dvh bg-black" />
+  if (!user) return <Logowanie />
 
   return (
     <div className="min-h-dvh bg-black text-zinc-200">

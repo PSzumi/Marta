@@ -2,22 +2,22 @@ import { useState, useEffect } from 'react'
 import { ArrowLeft, Crown, Plus, Star } from 'lucide-react'
 import { getSuccesses, addSuccess, syncFromCloud } from '../lib/storage'
 
-export default function SloikSukcesow({ navigate }) {
+export default function SloikSukcesow({ navigate, userId }) {
   const [successes, setSuccesses] = useState([])
   const [newText, setNewText] = useState('')
 
   useEffect(() => {
-    setSuccesses(getSuccesses())
+    setSuccesses(getSuccesses(userId))
 
     // Próba synchronizacji z chmurą (fire-and-forget)
-    syncFromCloud().then((merged) => {
+    syncFromCloud(userId).then((merged) => {
       if (merged) setSuccesses(merged)
     })
-  }, [])
+  }, [userId])
 
   const handleAdd = () => {
     if (!newText.trim()) return
-    const updated = addSuccess(newText.trim())
+    const updated = addSuccess(newText.trim(), userId)
     setSuccesses(updated)
     setNewText('')
   }

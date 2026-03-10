@@ -10,6 +10,7 @@ import {
   Phone,
   Mic,
   MicOff,
+  LogOut,
 } from 'lucide-react'
 
 // Kolejność: od najbardziej pozytywnych do kryzysowych
@@ -59,15 +60,16 @@ const bodyCheckOptions = [
   { label: 'Jest okej', target: 'sloik' },
 ]
 
-function getGreeting() {
+function getGreeting(name) {
+  const firstName = name?.split(' ')[0] || 'Witaj'
   const hour = new Date().getHours()
-  if (hour >= 5 && hour < 12) return 'Dzień dobry, Marta.'
-  if (hour >= 12 && hour < 18) return 'Cześć, Marta.'
-  if (hour >= 18 && hour < 22) return 'Dobry wieczór, Marta.'
-  return 'Hej, Marta.'
+  if (hour >= 5 && hour < 12) return `Dzień dobry, ${firstName}.`
+  if (hour >= 12 && hour < 18) return `Cześć, ${firstName}.`
+  if (hour >= 18 && hour < 22) return `Dobry wieczór, ${firstName}.`
+  return `Hej, ${firstName}.`
 }
 
-export default function Home({ navigate, micEnabled, toggleMic }) {
+export default function Home({ navigate, micEnabled, toggleMic, user, signOut }) {
   const [showCheckIn, setShowCheckIn] = useState(false)
 
   // ─── Long-press na nagłówek → Panel Piotrka ───
@@ -98,21 +100,32 @@ export default function Home({ navigate, micEnabled, toggleMic }) {
           onMouseUp={handlePressEnd}
           onMouseLeave={handlePressEnd}
         >
-          {getGreeting()}
+          {getGreeting(user?.user_metadata?.name)}
         </h1>
 
-        {/* Mic toggle */}
-        <button
-          onClick={toggleMic}
-          className="p-2 rounded-xl active:scale-[0.93] transition-transform"
-          aria-label={micEnabled ? 'Wyłącz monitoring głośności' : 'Włącz monitoring głośności'}
-        >
-          {micEnabled ? (
-            <Mic className="w-5 h-5 text-emerald-500/60" strokeWidth={1.5} />
-          ) : (
-            <MicOff className="w-5 h-5 text-zinc-700" strokeWidth={1.5} />
-          )}
-        </button>
+        <div className="flex items-center gap-1">
+          {/* Mic toggle */}
+          <button
+            onClick={toggleMic}
+            className="p-2 rounded-xl active:scale-[0.93] transition-transform"
+            aria-label={micEnabled ? 'Wyłącz monitoring głośności' : 'Włącz monitoring głośności'}
+          >
+            {micEnabled ? (
+              <Mic className="w-5 h-5 text-emerald-500/60" strokeWidth={1.5} />
+            ) : (
+              <MicOff className="w-5 h-5 text-zinc-700" strokeWidth={1.5} />
+            )}
+          </button>
+
+          {/* Sign out */}
+          <button
+            onClick={signOut}
+            className="p-2 rounded-xl active:scale-[0.93] transition-transform"
+            aria-label="Wyloguj się"
+          >
+            <LogOut className="w-5 h-5 text-zinc-700" strokeWidth={1.5} />
+          </button>
+        </div>
       </div>
 
       <button
